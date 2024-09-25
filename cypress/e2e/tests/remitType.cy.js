@@ -2,14 +2,15 @@ import { loginPage } from "../pages/login";
 const login = new loginPage();
 import { remitPage } from "../pages/remitType";
 const remit = new remitPage();
-describe("Remit Type Maintenance", () => {
+describe("Remit Type Maintenance Page", () => {
   beforeEach(() => {
     cy.visit("http://192.168.50.44:8041/Public/Login.aspx");
     cy.login("admin", "1", "001{enter}");
   });
-  it("login should be verified with right credentials", () => {});
-
-  context("Remit Page", () => {
+  context("Login Page Verify", () => {
+    it("login should be verified with right credentials", () => {});
+  });
+  context("Remit Page Verify", () => {
     beforeEach(() => {
       const code = "11209";
       login.screenCodeAction(`${code}{enter}`);
