@@ -17,6 +17,7 @@
 import './commands'
 import '../utils/loginCustom'
 import '../utils/customButton'
+import '../utils/message'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 // Hide fetch/XHR requests

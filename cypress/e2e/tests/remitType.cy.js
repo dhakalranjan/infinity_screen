@@ -9,18 +9,26 @@ describe("Remit Type Maintenance", () => {
   });
   it("login should be verified with right credentials", () => {});
 
-  it("Screen should be redirect to expected screen", () => {
-    const code = "11209";
-    login.screenCodeAction(`${code}{enter}`);
-    login.formNameCheck(code);
-  });
+  context("Remit Page", () => {
+    beforeEach(() => {
+      const code = "11209";
+      login.screenCodeAction(`${code}{enter}`);
+      login.formNameCheck(code);
+    });
+    it("Screen should be redirect to expected screen", () => {});
 
-  it("Remit should be saved with all correct field value", () => {
-    const code = "11209";
-    login.screenCodeAction(`${code}{enter}`);
-    login.formNameCheck(code);
-    cy.clickNew();
-    remit.createRemit();
-    cy.save()
+    it("Remit should be saved with all correct field value", () => {
+      cy.clickNew();
+      remit.createRemit();
+      cy.save();
+      cy.get('[aria-describedby="message"]').within(() => {
+        cy.verifyMessage("Remit Type Added Successfully");
+        cy.get('[type="button"]').eq(1).click();
+      });
+    });
+    it("Just Created Remit should be Approved", () => {
+      remit.approveRemit();
+      cy.verifyMessage("Remit Type Approved Successfully.");
+    });
   });
 });

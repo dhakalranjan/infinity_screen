@@ -1,4 +1,6 @@
 import { faker } from '@faker-js/faker';
+const remitName = faker.person.firstName()
+
 class remitPage{
     remitElements={
         getRemit:() => cy.get("#txtRemitName"),
@@ -11,12 +13,20 @@ class remitPage{
     }
     createRemit(){
         const remit = this.remitElements
-        remit.getRemit().type(faker.finance.accountName())
+        remit.getRemit().type(remitName)
         remit.getCash().select("YES")
         remit.getInTransit().type(faker.finance.currencyName())
         remit.getIBT().type(faker.finance.pin())
     }
+    approveRemit(){
+        cy.query()
+        const remit = this.remitElements
+        remit.getRemit().type(remitName,{delay:50})
+        cy.get(".ui-menu-item-wrapper").click();
+        cy.approve()
+
+    }
 }
-module.exports= {
-    remitPage
-}
+module.exports = {
+    remitPage,
+  };
